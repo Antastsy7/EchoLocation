@@ -3,7 +3,7 @@
 
 #include "Emissive_Basic.h"
 #include "Engine/Engine.h"
-#include "ConstructorHelpers.h"
+#include "UObject/ConstructorHelpers.h"
 #include "SoundWaveBasic.h"
 
 // Sets default values
@@ -12,13 +12,13 @@ AEmissive_Basic::AEmissive_Basic()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	CubeRoot = CreateAbstractDefaultSubobject<USceneComponent>(TEXT("CubeRoot"));
+	CubeRoot = CreateDefaultSubobject<USceneComponent>(TEXT("CubeRoot"));
 	RootComponent = CubeRoot;
 	
-	CubeMesh = CreateAbstractDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMesh"));
+	CubeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CubeMesh"));
 	CubeMesh->SetupAttachment(CubeRoot);
 
-	Collision = CreateAbstractDefaultSubobject<UBoxComponent>(TEXT("Collision"));
+	Collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
 	Collision->SetGenerateOverlapEvents(true);
 	Collision->SetWorldScale3D(FVector(2.0f, 2.0f, 2.0f));
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &AEmissive_Basic::OnSoundWaveRecieve);
